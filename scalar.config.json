@@ -96,7 +96,7 @@
                 "shell": ["httpie", "wget"],
                 "swift": ["nsurlsession"]
               },
-              "customCss": ".introduction-card-item.scalar-reference-intro-clients { display: none; } .scalar-app .narrow-references-container > header.api-reference-toolbar + * > .section-container:first-child { border-top: none !important; }"
+              "customCss": ".introduction-card-item.scalar-reference-intro-clients { display: none; } .scalar-app .narrow-references-container > header.api-reference-toolbar + * > .section-container:first-child { border-top: none !important; } .scalar-sidebar-footer, .sidebar-footer, [class*='powered-by'], [class*='scalar-powered'] { display: none !important; }"
             }
           }
         }
