@@ -16,13 +16,43 @@
       "/": {
         "type": "group",
         "title": "Scalekit",
-        "mode": "flat",
         "children": {
           "/": {
             "type": "page",
             "filepath": "docs/content/quickstart.md",
             "title": "Quickstart",
             "icon": "phosphor/regular/fast-forward"
+          },
+          "/sdk": {
+            "type": "group",
+            "title": "SDK References",
+            "icon": "phosphor/regular/code",
+            "children": {
+              "/sdk/node": {
+                "type": "page",
+                "filepath": "docs/content/sdk/node.md",
+                "title": "Node.js",
+                "icon": "phosphor/regular/file-code"
+              },
+              "/sdk/python": {
+                "type": "page",
+                "filepath": "docs/content/sdk/python.md",
+                "title": "Python",
+                "icon": "phosphor/regular/file-py"
+              },
+              "/sdk/go": {
+                "type": "page",
+                "filepath": "docs/content/sdk/go.md",
+                "title": "Go",
+                "icon": "phosphor/regular/file-code"
+              },
+              "/sdk/java": {
+                "type": "page",
+                "filepath": "docs/content/sdk/java.md",
+                "title": "Java",
+                "icon": "phosphor/regular/coffee"
+              }
+            }
           },
           "/api": {
             "type": "openapi",
