@@ -60,6 +60,10 @@
             "title": "API Reference",
             "icon": "phosphor/regular/plug",
             "config": {
+              "agent": {
+                "key": "eyJhbGciOiJFZERTQSJ9...",
+                "hideAddApi": true
+              },
               "theme": "default",
               "layout": "modern",
               "pageTitle": "Scalekit API",
