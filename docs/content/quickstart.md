@@ -1,57 +1,139 @@
 # Quickstart
 
-This is the Scalar Docs Starter Kit — a ready-to-use template for building beautiful documentation. Fork it, clone it, and make it your own. Everything here is meant to be modified, extended, or replaced to fit your project.
+Welcome to Scalekit API Documentation. Scalekit is an enterprise authentication platform that provides SSO, SCIM, and full-stack authentication for B2B applications.
 
-## 1. Preview Your Docs
+## About Scalekit
 
-Run a local development server to see your changes in real-time:
+Scalekit provides APIs for:
 
-```bash
-npx @scalar/cli project preview
-```
+- **Single Sign-On (SSO)** - SAML and OIDC authentication
+- **Organization Management** - Customer tenant accounts
+- **Admin Portal** - Self-service authentication configuration
+- **Directory Sync** - SCIM user/group synchronization
+- **API Tokens** - Machine-to-machine authentication
 
-This starts a live preview at `http://localhost:7971` where every edit you make is instantly visible.
+## Getting Started
 
-Read more about [Development](development.md).
+### 1. Get Your Credentials
 
-## 2. Include OpenAPI Documents
+[Sign up](https://www.scalekit.com) for a Scalekit account and get your API credentials from **Dashboard > Developers > Settings > API credentials**:
 
-Drop your OpenAPI files into `docs/api-reference/`, and add them to `@scalar.config.json` to have them automatically become interactive API references.
+- **Environment URL** - Your Scalekit environment (e.g., `https://acme.scalekit.dev`)
+- **Client ID** - Your application client ID (e.g., `skc_1234567890abcdef`)
+- **Client Secret** - Your application client secret (e.g., `test_abcdef1234567890`)
 
-The starter kit includes an example OpenAPI document to show you how it works.
+### 2. Get an Access Token
 
-Read more about [API References](api-references.md)
+Scalekit uses OAuth2 client credentials grant for machine-to-machine authentication. Request an access token from the token endpoint:
 
-## 3. Customize Everything
-
-Make it yours with themes, custom CSS, and MDX. Configure your documentation structure, navigation, and styling through `scalar.config.json`.
-
-## 4. Publish Your Docs
-
-First, authenticate with your Scalar account:
+**Request**
 
 ```bash
-npx @scalar/cli auth login
+curl -X POST "https://<SCALEKIT_ENVIRONMENT_URL>/oauth/token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=client_credentials" \
+  -d "client_id=<SCALEKIT_CLIENT_ID>" \
+  -d "client_secret=<SCALEKIT_CLIENT_SECRET>"
 ```
 
-Then publish your documentation:
+**Response**
+
+```json
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIn0...",
+  "token_type": "Bearer",
+  "expires_in": 3600
+}
+```
+
+The `access_token` is valid for 1 hour (3600 seconds). Store it securely and request a new token when it expires.
+
+### 3. Make Authenticated API Requests
+
+Include the access token in the `Authorization` header as a Bearer token:
+
+**List Organizations**
 
 ```bash
-npx @scalar/cli project publish
+curl -X GET "https://<SCALEKIT_ENVIRONMENT_URL>/api/v1/organizations?page_size=10" \
+  -H "Authorization: Bearer <ACCESS_TOKEN>"
 ```
 
-Your site will be available at `<your-slug>.apidocumentation.com`.
-
-## Stuck?
-
-Check whether your `scalar.config.json` is valid:
+**Create a User in an Organization**
 
 ```bash
-npx @scalar/cli project check-config
+curl -X POST "https://<SCALEKIT_ENVIRONMENT_URL>/api/v1/organizations/{organization_id}/users" \
+  -H "Authorization: Bearer <ACCESS_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "user_profile": {
+      "first_name": "John",
+      "last_name": "Doe"
+    },
+    "membership": {
+      "roles": ["admin"]
+    }
+  }'
 ```
 
-We're here to help:
+## Using SDKs
 
-- [Email support@scalar.com](mailto:support@scalar.com)
-- [Chat with us on Discord](https://discord.gg/scalar)
-- [Schedule a call](https://scalar.cal.com/scalar/chat-with-scalar)
+Scalekit provides SDKs that handle authentication automatically.
+
+### Node.js
+
+```bash
+npm install @scalekit-sdk/node
+```
+
+```javascript
+import { ScalekitClient } from '@scalekit-sdk/node';
+
+const scalekit = new ScalekitClient(
+  process.env.SCALEKIT_ENVIRONMENT_URL,
+  process.env.SCALEKIT_CLIENT_ID,
+  process.env.SCALEKIT_CLIENT_SECRET
+);
+
+// List organizations
+const { organizations } = await scalekit.organization.listOrganizations();
+
+// Create a user
+const { user } = await scalekit.user.createUserAndMembership('org_123', {
+  email: 'user@example.com',
+  userProfile: { firstName: 'John', lastName: 'Doe' }
+});
+```
+
+### Python
+
+```bash
+pip install scalekit-sdk-python
+```
+
+```python
+from scalekit import ScalekitClient
+
+scalekit = ScalekitClient(
+    environment_url='<SCALEKIT_ENVIRONMENT_URL>',
+    client_id='<SCALEKIT_CLIENT_ID>',
+    client_secret='<SCALEKIT_CLIENT_SECRET>'
+)
+
+# List organizations
+organizations = scalekit.organization.list_organizations()
+
+# Create a user
+user = scalekit.user.create_user_and_membership(
+    organization_id='org_123',
+    email='user@example.com',
+    user_profile={'first_name': 'John', 'last_name': 'Doe'}
+)
+```
+
+## Resources
+
+- [Scalekit Developer Documentation](https://docs.scalekit.com)
+- [Scalekit Dashboard](https://dashboard.scalekit.com)
+- [Scalekit Support](mailto:support@scalekit.com)

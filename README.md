@@ -5,61 +5,49 @@
 
 Complete API documentation for Scalekit - the enterprise authentication platform that lets you build enterprise-grade authentication for you and your customers.
 
-## About Scalekit
+## Scalar CLI Commands
 
-Scalekit provides APIs to implement:
+### 1. Authenticate
 
-- **Single Sign-On (SSO)** - Redirect users to authenticate with their chosen Identity Provider (IdP)
-- **Organization Management** - Create and manage customer accounts and details
-- **Admin Portal APIs** - Let users configure their own authentication from your app
-- **Connection APIs** - Control SSO connections to enable/disable them in real-time
-- **Directory Sync** - Synchronize users and groups from enterprise directories (SCIM)
+Login to Scalar CLI to access authenticated features:
 
-## Getting Started
+```bash
+npx @scalar/cli auth login
+```
 
-To use the Scalekit API:
+Opens a browser for authentication. Credentials are stored locally for future sessions.
 
-1. [Sign up](https://www.scalekit.com) for a Scalekit account
-2. Get your credentials from the Scalekit Dashboard > API Config:
-   - Client ID
-   - Client Secret
-   - Environment URL
-3. Read the developer documentation at [docs.scalekit.com](https://docs.scalekit.com)
+### 2. Preview Documentation
 
-## Preview Documentation
-
-Use the [Scalar CLI](https://scalar.com/tools/cli/getting-started) to render a live preview of the API documentation locally:
+Start a local development server to preview the API documentation:
 
 ```bash
 npx @scalar/cli project preview
 ```
 
-This will start a local development server where you can view and interact with the documentation in real-time.
+This renders the docs using the Scalekit API registry URL configured in `scalar.config.json`.
 
-## Validate Configuration
+### 3. Validate Configuration
 
-Ensure your project configuration is properly set up by running the configuration validation command:
+Check that your `scalar.config.json` is properly configured:
 
 ```bash
 npx @scalar/cli project check-config
 ```
 
-This will verify that your `scalar.config.json` file contains valid settings and help identify any configuration issues.
+### 4. Deploy Documentation
 
-### GitHub Action
+Deploy the documentation to Scalar's hosting platform:
 
-This repository includes a GitHub Action workflow that automatically validates the configuration on every push and pull request. See [`.github/workflows/validate-scalar-configuration.yml`](./.github/workflows/validate-scalar-configuration.yml).
-
-## Authentication
-
-Scalekit API uses [OAuth2 client credentials](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials) based authentication to consume the APIs. You'll need to obtain an access token using your client credentials before making API requests.
+```bash
+npx @scalar/cli project deploy
+```
 
 ## Project Structure
 
 ```
 scalekit-api/
 ├── docs/
-│   ├── api-reference/      # OpenAPI specifications for Scalekit endpoints
 │   └── content/            # Guides and documentation
 ├── scalar.config.json      # Scalar documentation configuration
 └── README.md
@@ -67,30 +55,41 @@ scalekit-api/
 
 ## Configuration
 
-All project configuration is managed through the [`scalar.config.json`](./scalar.config.json) file. This file controls:
+The `scalar.config.json` file controls:
 
-- Documentation structure and navigation
-- OpenAPI document sources
-- Theme and styling options
-- Build and deployment settings
+- **Navigation** - Documentation structure and routing
+- **OpenAPI Source** - API spec URL (uses Scalar registry)
+- **Theme** - Visual styling and branding
 
-## API Endpoints
+The Scalekit API is loaded from the Scalar registry:
 
-The Scalekit API reference includes:
+```json
+{
+  "type": "openapi",
+  "url": "https://registry.scalar.com/@scalekit-team/apis/scalekit-apis@1.0.0"
+}
+```
 
-- **Authentication** - OAuth2 authorization and token management
-- **Organizations** - Create and manage customer tenant accounts
-- **Connections** - Configure SAML and OIDC SSO connections
-- **Directories** - SCIM directory synchronization and management
-- **Admin Portal** - Generate admin portal links for customers
+## GitHub Actions
+
+This repository includes a GitHub Action that automatically validates the configuration on every push and pull request. See [`.github/workflows/validate-scalar-configuration.yml`](./.github/workflows/validate-scalar-configuration.yml).
+
+## About Scalekit
+
+Scalekit provides APIs for:
+
+- **Single Sign-On (SSO)** - SAML and OIDC authentication
+- **Organization Management** - Customer tenant accounts
+- **Admin Portal** - Self-service authentication configuration
+- **Directory Sync** - SCIM user/group synchronization
 
 ## Resources
 
 - [Scalekit Developer Documentation](https://docs.scalekit.com)
-- [Scalar Docs](https://scalar.com/products/docs/getting-started)
-- [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification)
+- [Scalar CLI Documentation](https://scalar.com/tools/cli/getting-started)
+- [Scalar Configuration Reference](https://github.com/scalar/scalar/blob/main/documentation/configuration.md)
 - [Scalekit Support](mailto:support@scalekit.com)
 
 ## License
 
-This documentation is licensed under MIT. See [LICENSE](./LICENSE) for details.
+MIT. See [LICENSE](./LICENSE) for details.
