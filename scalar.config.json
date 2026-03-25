@@ -7,8 +7,8 @@
   },
   "siteConfig": {
     "logo": {
-      "darkMode": "docs/assets/scalekit-api-white.svg",
-      "lightMode": "docs/assets/scalekit-api-black.svg"
+      "darkMode": "docs/assets/scalekit-api-black.svg",
+      "lightMode": "docs/assets/scalekit-api-white.svg"
     }
   },
   "navigation": {
