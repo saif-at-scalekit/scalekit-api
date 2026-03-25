@@ -14,90 +14,84 @@
   "navigation": {
     "routes": {
       "/": {
-        "type": "group",
-        "title": "Scalekit",
-        "children": {
-          "/": {
-            "type": "page",
-            "filepath": "docs/content/quickstart.md",
-            "title": "Quickstart",
-            "icon": "phosphor/regular/fast-forward"
-          },
-          "/api": {
-            "type": "openapi",
-            "url": "https://registry.scalar.com/@scalekit-team/apis/scalekit-apis@1.0.0",
-            "title": "API Reference",
-            "icon": "phosphor/regular/plug",
-            "configuration": {
-              "theme": "default",
-              "layout": "modern",
-              "pageTitle": "Scalekit API",
-              "favicon": "https://cdn.prod.website-files.com/65b87d98fa638289e10b8f61/67ab35acf2f180e0fe0a94a8_S%20Icon%20-%20Black%20-%2032x32.png",
-              "hideTestRequestButton": false,
-              "withDefaultFonts": false,
-              "hideModels": true,
-              "searchHotKey": "p",
-              "hideDarkModeToggle": true,
-              "darkMode": false,
-              "proxyUrl": "https://proxy.scalar.com",
-              "defaultOpenAllTags": true,
-              "hideClientButton": true,
-              "documentDownloadType": "json",
-              "servers": [
-                {
-                  "url": "https://{SCALEKIT_ENVIRONMENT_URL}",
-                  "description": "Scalekit Environment",
-                  "variables": {
-                    "SCALEKIT_ENVIRONMENT_URL": {
-                      "default": "your-env.scalekit.com",
-                      "description": "Your full Scalekit environment URL (e.g., my-env.scalekit.com or my-env.scalekit.dev)"
-                    }
-                  }
+        "type": "page",
+        "filepath": "docs/content/quickstart.md",
+        "title": "Quickstart",
+        "icon": "phosphor/regular/fast-forward"
+      },
+      "/api": {
+        "type": "openapi",
+        "url": "https://registry.scalar.com/@scalekit-team/apis/scalekit-apis@1.0.0",
+        "title": "API Reference",
+        "icon": "phosphor/regular/plug",
+        "configuration": {
+          "theme": "default",
+          "layout": "modern",
+          "pageTitle": "Scalekit API",
+          "favicon": "https://cdn.prod.website-files.com/65b87d98fa638289e10b8f61/67ab35acf2f180e0fe0a94a8_S%20Icon%20-%20Black%20-%2032x32.png",
+          "hideTestRequestButton": false,
+          "withDefaultFonts": false,
+          "hideModels": true,
+          "searchHotKey": "p",
+          "hideDarkModeToggle": true,
+          "darkMode": false,
+          "proxyUrl": "https://proxy.scalar.com",
+          "defaultOpenAllTags": true,
+          "hideClientButton": true,
+          "documentDownloadType": "json",
+          "servers": [
+            {
+              "url": "https://{SCALEKIT_ENVIRONMENT_URL}",
+              "description": "Scalekit Environment",
+              "variables": {
+                "SCALEKIT_ENVIRONMENT_URL": {
+                  "default": "your-env.scalekit.com",
+                  "description": "Your full Scalekit environment URL (e.g., my-env.scalekit.com or my-env.scalekit.dev)"
                 }
-              ],
-              "authentication": {
-                "preferredSecurityScheme": "oauth2",
-                "securitySchemes": {
-                  "oauth2": {
-                    "type": "oauth2",
-                    "flows": {
-                      "clientCredentials": {
-                        "tokenUrl": "https://{SCALEKIT_ENVIRONMENT_URL}/oauth/token",
-                        "x-scalar-credentials-location": "body",
-                        "x-scalar-security-body": {
-                          "grant_type": "client_credentials"
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "hiddenClients": {
-                "c": ["libcurl"],
-                "csharp": ["httpclient", "restsharp"],
-                "clojure": ["clj_http"],
-                "dart": ["http"],
-                "go": ["native"],
-                "http": ["http1.1", "http1", "http2"],
-                "java": ["asynchttp", "okhttp", "unirest", "nethttp"],
-                "js": ["xhr", "fetch", "axios", "jquery", "ofetch", "request"],
-                "kotlin": ["okhttp"],
-                "node": ["undici", "axios", "fetch", "ofetch"],
-                "objc": ["nsurlsession"],
-                "ocaml": ["cohttp"],
-                "fsharp": ["httpclient"],
-                "php": ["curl", "guzzle"],
-                "powershell": ["restmethod", "webrequest"],
-                "python": ["python3", "requests", "httpx_sync", "httpx_async"],
-                "r": ["httr"],
-                "ruby": ["native"],
-                "rust": ["reqwest"],
-                "shell": ["httpie", "wget"],
-                "swift": ["nsurlsession"]
-              },
-              "customCss": ".introduction-card-item.scalar-reference-intro-clients { display: none; } .scalar-app .narrow-references-container > header.api-reference-toolbar + * > .section-container:first-child { border-top: none !important; }"
+              }
             }
-          }
+          ],
+          "authentication": {
+            "preferredSecurityScheme": "oauth2",
+            "securitySchemes": {
+              "oauth2": {
+                "type": "oauth2",
+                "flows": {
+                  "clientCredentials": {
+                    "tokenUrl": "https://{SCALEKIT_ENVIRONMENT_URL}/oauth/token",
+                    "x-scalar-credentials-location": "body",
+                    "x-scalar-security-body": {
+                      "grant_type": "client_credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "hiddenClients": {
+            "c": ["libcurl"],
+            "csharp": ["httpclient", "restsharp"],
+            "clojure": ["clj_http"],
+            "dart": ["http"],
+            "go": ["native"],
+            "http": ["http1.1", "http1", "http2"],
+            "java": ["asynchttp", "okhttp", "unirest", "nethttp"],
+            "js": ["xhr", "fetch", "axios", "jquery", "ofetch", "request"],
+            "kotlin": ["okhttp"],
+            "node": ["undici", "axios", "fetch", "ofetch"],
+            "objc": ["nsurlsession"],
+            "ocaml": ["cohttp"],
+            "fsharp": ["httpclient"],
+            "php": ["curl", "guzzle"],
+            "powershell": ["restmethod", "webrequest"],
+            "python": ["python3", "requests", "httpx_sync", "httpx_async"],
+            "r": ["httr"],
+            "ruby": ["native"],
+            "rust": ["reqwest"],
+            "shell": ["httpie", "wget"],
+            "swift": ["nsurlsession"]
+          },
+          "customCss": ".introduction-card-item.scalar-reference-intro-clients { display: none; } .scalar-app .narrow-references-container > header.api-reference-toolbar + * > .section-container:first-child { border-top: none !important; }"
         }
       }
     }
