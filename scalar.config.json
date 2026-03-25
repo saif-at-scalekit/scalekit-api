@@ -29,7 +29,7 @@
             "url": "https://registry.scalar.com/@scalekit-team/apis/scalekit-apis@1.0.0",
             "title": "API Reference",
             "icon": "phosphor/regular/plug",
-            "configuration": {
+            "config": {
               "theme": "default",
               "layout": "modern",
               "pageTitle": "Scalekit API",
